@@ -20,7 +20,7 @@ namespace Ghirean_Daria_Lab2.Models
             }
         }
 
-        public ICollection<Book>? Books { get; set; }  //navigation property
+        public ICollection<Book>? Books { get; set; }  //navigation property, o relatie one to many
 
     }
 }
