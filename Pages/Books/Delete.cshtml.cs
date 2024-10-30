@@ -10,7 +10,7 @@ using Ghirean_Daria_Lab2.Models;
 
 namespace Ghirean_Daria_Lab2.Pages.Books
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : BookCategoriesPageModel
     {
         private readonly Ghirean_Daria_Lab2.Data.Ghirean_Daria_Lab2Context _context;
 
