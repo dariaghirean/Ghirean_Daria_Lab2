@@ -22,7 +22,7 @@ namespace Ghirean_Daria_Lab2.Pages.Books
 
         [BindProperty]
         public Book Book { get; set; } = default!;
-
+        //public List<AssignedCategoryData> AssignedCategoryDataList { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -30,11 +30,12 @@ namespace Ghirean_Daria_Lab2.Pages.Books
                 return NotFound();
             }
 
-            Book =  await _context.Book
+            Book = await _context.Book
                 .Include(b => b.Author)
                 .Include(b => b.Publisher)
                 .Include(b => b.BookCategories).ThenInclude(b => b.Category)
-                .AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);                 
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);              
 
             if (Book == null)
             {
@@ -43,11 +44,11 @@ namespace Ghirean_Daria_Lab2.Pages.Books
 
             //apelam PopulateAssignedCategoryData  pentru o obtine informatiile necesare checkbox
             //urilor folosind clasa AssignedCategoryData
+            
             PopulateAssignedCategoryData(_context, Book);
 
-
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "AuthorName");
+            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID", "FullName");
             return Page();
         }
 
@@ -63,7 +64,8 @@ namespace Ghirean_Daria_Lab2.Pages.Books
                 .Include(i => i.Publisher)                 
                 .Include(i => i.BookCategories)                     
                     .ThenInclude(i => i.Category)                 
-                .FirstOrDefaultAsync(s => s.ID == id);             
+                .FirstOrDefaultAsync(s => s.ID == id);    
+            
             if (bookToUpdate == null)             
             {                 
                 return NotFound();             
