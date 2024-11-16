@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ghirean_Daria_Lab2.Data;
 using Ghirean_Daria_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ghirean_Daria_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : BookCategoriesPageModel
     {
         private readonly Ghirean_Daria_Lab2.Data.Ghirean_Daria_Lab2Context _context;
